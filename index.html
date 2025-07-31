@@ -24,12 +24,11 @@
             </tr>
             <tr>
                 <td></td>
-                <td><button onclick="cadastrarLivro()">Cadastrar Livro</button></td>
+                <td><button onclick="efetuarCadastroLivro()">Cadastrar Livro</button></td>
             </tr>
         </table>
 
         <h3>Listagem das informações de livros</h3>
-
         <table>
             <thead>
                 <tr>
@@ -38,10 +37,17 @@
                     <th>Ano de publicação</th>
                 </tr>
             </thead>
-            <tbody id="tblListagemBody">
+            <tbody id="corpoTabelaListagem">
                 <!-- Novas linhas de tabela serão adicionadas pelo JavaScript aqui -->
             </tbody>
         </table>
+
+        <h3>Busca de livro (por título):</h3>
+        <input type="text" id="inputBuscarTitulo" placeholder="Digite parte do título">
+        <button onclick="processarBuscaLivroPorTítulo()">Buscar</button>
+
+        <h4>Resultado da busca:</h4>
+        <p id="parResultadoBusca">Nenhuma busca foi efetuada ainda.</p>
 
         <script src="index.js"></script>
     </body>

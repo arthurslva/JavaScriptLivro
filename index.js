@@ -1,42 +1,50 @@
-function cadastrarLivro() {
-	const livro = criarLivro(); // já com os dados do form
-	inserirLivroNaTabela(livro); // montar a tr, tds...
-	resetarCamposHTML();
+const corpoTabelaListagem = document.getElementById("corpoTabelaListagem"); // HTML elem
+
+const id = document.getElementById("livroID"); // HTML elem
+const título = document.getElementById("livroTitulo"); // HTML elem
+const ano = document.getElementById("livroAno"); // HTML elem
+const inputBuscarTitulo = document.getElementById("inputBuscarTitulo"); // HTML elem
+
+let mensagemBusca = document.getElementById("parResultadoBusca");
+let livro;
+// queria ter uma lista para armazenar os livros
+
+function efetuarCadastroLivro() {
+    livro = criarLivro(id.value, título.value, ano.value);
+
+    // queria guardar o objeto livro na lista
+    incluirLivroTabelaResultadoBusca();
+    apagarCamposHTMLDadosLivro();
 }
 
-function criarLivro() {
-	// ler os valores dos inputs formulário HTML
-	const livroID = document.getElementById("livroID").value; // string "12"
-	const livroTitulo = document.getElementById("livroTitulo").value; // string "Java"
-	const livroAno = document.getElementById("livroAno").value; // string "2001"
+function criarLivro(umId, umTítulo, umAno) {
+    // criar objeto livro
+    const objetoLivro = {
+        id: umId,
+        titulo: umTítulo,
+        ano: umAno,
+    };
 
-	// montar um objeto livro com propriedades (esq)
-	const objetoLivro = {
-		id: livroID,
-		titulo: livroTitulo,
-		ano: livroAno,
-	};
-
-	return objetoLivro;
+    return objetoLivro;
 }
 
-function inserirLivroNaTabela(livro) {
-
-	const tblListagemBody = document.getElementById("tblListagemBody");
-	const novaLinha = criarLinhaTabela(livro); 
-	tblListagemBody.appendChild(novaLinha); 
+function incluirLivroTabelaResultadoBusca() {
+    const novaLinha = criarNovaLinhaComDadosLivro();
+    corpoTabelaListagem.appendChild(novaLinha);
 }
 
-function criarLinhaTabela(livro) {
-	const novaLinha = document.createElement("tr");
-	novaLinha.innerHTML = `<td>${livro.id}</td> <td>${livro.titulo}</td> <td>${livro.ano}</td>`;
-	return novaLinha; 
-
+function criarNovaLinhaComDadosLivro() {
+    const novaLinha = document.createElement("tr");
+    novaLinha.innerHTML = `<td>${livro.id}</td><td>${livro.titulo}</td><td>${livro.ano}</td>`;
+    return novaLinha;
 }
 
-function resetarCamposHTML() {
-	// apagar os valores dos campos no form HTML
-	document.getElementById("livroID").value = "";
-	document.getElementById("livroTitulo").value = "";
-	document.getElementById("livroAno").value = "";
+function apagarCamposHTMLDadosLivro() {
+    // apagar os valores dos campos
+    id.value = "";
+    título.value = "";
+    ano.value = "";
 }
+
+// a função que devemos implementar
+function processarBuscaLivroPorTítulo() {}
